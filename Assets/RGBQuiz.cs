@@ -161,7 +161,7 @@ public class RGBQuiz : MonoBehaviour
     private void GenerateColors()
     {
         startOver:
-        int sc = startingColor;
+        int sc = 0;
         for (int st = 0; st < 3; st++)
         {
             screenColors[st] = possibleColors[st][Rnd.Range(0, possibleColors[st].Length)];
@@ -184,6 +184,7 @@ public class RGBQuiz : MonoBehaviour
                 if (new[] { red, green, blue }.Distinct().Count() != 3)
                     goto startOver;
                 startingColor = red > green && red > blue ? 0 : green > red && green > blue ? 1 : 2;
+                sc = startingColor;
             }
             Debug.LogFormat("[RGB Quiz #{0}] Stage {1}, color index: {2}", moduleId, st + 1, sc == 0 ? "red" : sc == 1 ? "green" : "blue");
             for (int i = 0; i < solutions[st].Length; i++)
@@ -212,7 +213,28 @@ public class RGBQuiz : MonoBehaviour
                 GetColorNums(gridColors[st][14]).Select(i => i * 2 == 2 ? "+" : i * 2 == 1 ? "0" : "-").ToArray().Join("")
                 );
             Debug.LogFormat("[RGB Quiz #{0}] Stage {1}, Screen color: {2}", moduleId, st + 1, GetColorNums(screenColors[st]).Select(i => i * 2 == 2 ? "+" : i * 2 == 1 ? "0" : "-").ToArray().Join(""));
-            Debug.LogFormat("[RGB Quiz #{0}] Stage {1}, Solution: {2}", moduleId, st + 1, solutions[st].Select(i => i ? "#" : "x").ToArray().Join(""));
+            Debug.LogFormat("[RGB Quiz #{0}] Stage {1}, Solution:", moduleId, st + 1);
+            Debug.LogFormat("[RGB Quiz #{0}] {1} {2} {3} {4} {5}", moduleId,
+                solutions[st][0] ? "#" : "x",
+                solutions[st][1] ? "#" : "x",
+                solutions[st][2] ? "#" : "x",
+                solutions[st][3] ? "#" : "x",
+                solutions[st][4] ? "#" : "x"
+                );
+            Debug.LogFormat("[RGB Quiz #{0}] {1} {2} {3} {4} {5}", moduleId,
+                solutions[st][5] ? "#" : "x",
+                solutions[st][6] ? "#" : "x",
+                solutions[st][7] ? "#" : "x",
+                solutions[st][8] ? "#" : "x",
+                solutions[st][9] ? "#" : "x"
+                );
+            Debug.LogFormat("[RGB Quiz #{0}] {1} {2} {3} {4} {5}", moduleId,
+                solutions[st][10] ? "#" : "x",
+                solutions[st][11] ? "#" : "x",
+                solutions[st][12] ? "#" : "x",
+                solutions[st][13] ? "#" : "x",
+                solutions[st][14] ? "#" : "x"
+                );
         }
     }
 
